@@ -56,14 +56,17 @@ const App = () => {
     return(
       <div>
        total of  {course.parts[0].exercises + course.parts[1].exercises + course.parts[2].exercises + course.parts[3].exercises} exercises
-       
+
       </div>
     )
   }
   
   const mapItems = course.parts.map(part => part.id)
   console.log(mapItems)
-
+const total = course.parts.reduce((s, p) =>
+   s + p.exercises
+,0);
+console.log(total)
   const Course = () => {
     return(<div>
       <Header/>
