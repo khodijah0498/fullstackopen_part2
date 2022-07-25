@@ -1,70 +1,45 @@
-import './App.css';
-
-import Course from './components/Course'
-;
-
+import { useState } from "react";
 
 const App = () => {
-  const courses = [
-    {
-      name: "Half Stack application development",
-      id: 1,
-      parts: [
-        {
-          name: "Fundamentals of React",
-          exercises: 10,
-          id: 1,
-        },
-        {
-          name: "Using props to pass data",
-          exercises: 7,
-          id: 2,
-        },
-        {
-          name: "State of a component",
-          exercises: 14,
-          id: 3,
-        },
-        {
-          name: "Redux",
-          exercises: 11,
-          id: 4,
-        },
-      ],
-    },
+  const [persons, setPersons] = useState([
+    { name: "Arto Hellas" },
+    
+  ]);
+  const [newName, setNewName] = useState("");
 
-    {
-      name: "Node.js",
-      id: 2,
-      parts: [
-        {
-          name: "Routing",
-          exercises: 3,
-          id: 1,
-        },
+  const changeName = (event) => {
+    setNewName(event.target.value);
+  };
+  const addName = (e) => {
+    e.preventDefault();
 
-        {
-          name: "Middlewares",
-          exercises: 7,
-          id: 2,
-        },
+    const findName = persons.find((person) => person.name === newName);
+    if (findName) {
+      
+      setPersons([...persons]);
+    } else {
+      setPersons([...persons, { name: newName }]);
+    }
 
-        
-      ],
-    },
-  ];
-  
-  
+     };
+
   return (
     <div>
-      {courses.map((course) => {
-        return (
-          <div key={course.id}>
-            <Course course={course} />
-          </div>
-        );
-      })}
-      
+      <h2>Phonebook</h2>
+      <form onSubmit={addName}>
+        <div>
+          name: <input value={newName} onChange={changeName} />
+        </div>
+        <div>
+          <button type="submit">add</button>
+        </div>
+      </form>
+      <h2>Numbers</h2>
+      <ul>
+        {persons.map((person, i) => (
+          <li key={i}>{person.name}</li>
+        ))}
+      </ul>
     </div>
   );
 };
