@@ -3,7 +3,7 @@ import { useState } from "react";
 const App = () => {
   const [persons, setPersons] = useState([
     { name: "Arto Hellas" },
-    
+    { name: "Sis Khadijah cv12" },
   ]);
   const [newName, setNewName] = useState("");
 
@@ -15,7 +15,7 @@ const App = () => {
 
     const findName = persons.find((person) => person.name === newName);
     if (findName) {
-      
+      alert(`${newName} is already added to phonebook`);
       setPersons([...persons]);
     } else {
       setPersons([...persons, { name: newName }]);
